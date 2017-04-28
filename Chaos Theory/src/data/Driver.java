@@ -21,9 +21,9 @@ public class Driver {
 
     public Driver() {
         BeginSession();
-        //Textures.load();
+        Textures.load();
         singleTriangle();
-        fern();
+        //fern();
  	}
 
     private void singleTriangle()
