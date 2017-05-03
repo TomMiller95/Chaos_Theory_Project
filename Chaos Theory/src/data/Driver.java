@@ -13,11 +13,10 @@ import static Helpers.Artist.*;
 
 public class Driver {
 	
-	static final int WINDOW_LENGTH = Artist.HEIGHT;	//Same in Artist
-	static final int WINDOW_WIDTH = Artist.WIDTH;	//Same in Artist
 	private final int DISPLAY_SPEED = 1000;
 	Random rgen = new Random();
 	ArrayList<Point> points = new ArrayList<>();
+    int dotSize = 1;
 
     public Driver() {
         BeginSession();
@@ -28,19 +27,24 @@ public class Driver {
 
     private void singleTriangle()
     {
-    	Point p = new Point(Textures.getTex("point"),250,250,5,5);
+    	Point p1 = new Point(Textures.getTex("greenPoint"),250,250,5,5);
+        Point p2 = new Point(Textures.getTex("bluePoint"),250,250,5,5);
+        Point p3 = new Point(Textures.getTex("redPoint"),250,250,5,5);
         
         Point background = new Point(Textures.getTex("background"),0,0,1500,1500);
 
-        Point A = new Point(Textures.getTex("point"),500,50,20,20);
-        Point B = new Point(Textures.getTex("point"),100,600,20,20);
-        Point C = new Point(Textures.getTex("point"),900,600,20,20);
+        /*
+        Point A = new Point(Textures.getTex("greenPoint"),500,50,10,10);
+        Point B = new Point(Textures.getTex("greenPoint"),100,600,10,10);
+        Point C = new Point(Textures.getTex("greenPoint"),900,600,10,10);
         int pointAX = 500;
         int pointAY = 50;
         int pointBX = 100;
         int pointBY = 600;
         int pointCX = 900;
         int pointCY = 600;
+        */
+
 
         /*
         Point A = new Point(Textures.getTex("point"),700,50,20,20);
@@ -53,11 +57,28 @@ public class Driver {
         int pointCX = 550;
         int pointCY = 500;
         */
+
+        //Right Triangle
+        Point A = new Point(Textures.getTex("greenPoint"),100,50,10,10);
+        Point B = new Point(Textures.getTex("greenPoint"),100,600,10,10);
+        Point C = new Point(Textures.getTex("greenPoint"),900,600,10,10);
+        int pointAX = 100;
+        int pointAY = 50;
+        int pointBX = 100;
+        int pointBY = 600;
+        int pointCX = 900;
+        int pointCY = 600;
+
         
-        float x = 250;
-        float y = 250;
-        
-        p.update();
+        float x1 = 250;
+        float y1 = 250;
+        float x2 = 250;
+        float y2 = 250;
+        float x3 = 250;
+        float y3 = 250;
+        p1.update();
+        p2.update();
+        p3.update();
         int roll;
         
         while (!Display.isCloseRequested())        //Runs until simulation is terminated, or finished.
@@ -75,26 +96,66 @@ public class Driver {
             	points.get(i).update();
             }
             
-            roll = rgen.nextInt(3);
+            roll = rgen.nextInt(4);
             
-            if (roll == 0)
+            if (roll == 0 || roll == 3)
             {
-            	x += (pointAX-x)/2;
-            	y += (pointAY-y)/2;
+            	x1 += (pointAX-x1)/2;
+            	y1 += (pointAY-y1)/2;
             }
             else if (roll == 1)
             {
-            	x += (pointBX-x)/2;
-            	y += (pointBY-y)/2;
+            	x1 += (pointBX-x1)/2;
+            	y1 += (pointBY-y1)/2;
             }
             else
             {
-            	x += (pointCX-x)/2;
-            	y += (pointCY-y)/2;
+            	x1 += (pointCX-x1)/2;
+            	y1 += (pointCY-y1)/2;
+            }
+
+            roll = rgen.nextInt(4);
+
+            if (roll == 0)
+            {
+                x2 += (pointAX-x2)/2;
+                y2 += (pointAY-y2)/2;
+            }
+            else if (roll == 1 || roll == 3)
+            {
+                x2 += (pointBX-x2)/2;
+                y2 += (pointBY-y2)/2;
+            }
+            else
+            {
+                x2 += (pointCX-x2)/2;
+                y2 += (pointCY-y2)/2;
+            }
+
+            roll = rgen.nextInt(4);
+
+            if (roll == 0)
+            {
+                x3 += (pointAX-x3)/2;
+                y3 += (pointAY-y3)/2;
+            }
+            else if (roll == 1)
+            {
+                x3 += (pointBX-x3)/2;
+                y3 += (pointBY-y3)/2;
+            }
+            else if (roll == 2 || roll == 3)
+            {
+                x3 += (pointCX-x3)/2;
+                y3 += (pointCY-y3)/2;
             }
             
-            p = new Point(Textures.getTex("point"),x,y,5,5);
-            points.add(p);
+            p1 = new Point(Textures.getTex("greenPoint"),x1,y1,dotSize,dotSize);
+            points.add(p1);
+            p2 = new Point(Textures.getTex("bluePoint"),x2,y2,dotSize,dotSize);
+            points.add(p2);
+            p3 = new Point(Textures.getTex("redPoint"),x3,y3,dotSize,dotSize);
+            points.add(p3);
             
             Display.update();
             Display.sync(DISPLAY_SPEED);  //Basically this is the speed of the simulation
@@ -103,7 +164,15 @@ public class Driver {
     }
     
     
-    
+
+
+
+
+
+
+
+
+
     private void fern()
     {
     	Point p = new Point(Textures.getTex("point"),250,250,10,10);

@@ -17,7 +17,7 @@ public class Artist {
 	public static final int WIDTH = 1200, HEIGHT = 700;
 	public static void BeginSession()
 	{
-		Display.setTitle("Langston's Ant"); 
+		Display.setTitle("Chaos Game");
 		try
 		{
 			Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT)); 
